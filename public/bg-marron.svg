@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <defs>
+    <filter id="soften">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+    </filter>
+    
+    <radialGradient id="grad1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#8c6239;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5d3a1a;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1000" height="1000" fill="#3d2b1f" />
+
+  <g id="rorschach-pattern">
+    
+    <g id="left-side">
+      <path d="M500,200 Q400,150 300,300 T200,500 T350,750 T500,800" fill="#8c6239" opacity="0.8" />
+      
+      <path d="M480,350 C350,250 150,350 100,550 C80,650 250,850 480,700" fill="#b4876c" opacity="0.6" />
+      
+      <path d="M450,450 Q380,400 320,500 T400,650" fill="#ddcfba" opacity="0.5" />
+      <path d="M490,250 Q450,200 420,300" fill="#ceb09a" opacity="0.7" />
+      
+      <path d="M470,300 Q300,200 150,450" fill="none" stroke="#fef7ed" stroke-width="2" opacity="0.3" />
+      <path d="M480,750 Q350,850 200,650" fill="none" stroke="#c7b299" stroke-width="3" opacity="0.4" />
+      
+      <circle cx="250" cy="400" r="15" fill="#8c6239" opacity="0.4" />
+      <circle cx="180" cy="580" r="8" fill="#ceb09a" opacity="0.6" />
+    </g>
+
+    <use href="#left-side" transform="scale(-1, 1) translate(-1000, 0)" />
+  </g>
+
+  <style>
+    @keyframes rotateSlow {
+      from { transform: rotate(0deg); transform-origin: center; }
+      to { transform: rotate(360deg); transform-origin: center; }
+    }
+    #rorschach-pattern {
+      animation: rotateSlow 60s linear infinite;
+    }
+  </style>
+</svg>

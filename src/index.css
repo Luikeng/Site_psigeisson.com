@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nunito:wght@300;400;600&family=Playfair+Display:wght@700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", serif;
+  --font-body: "Nunito", sans-serif;
+
+  --color-brand-bg: #fdfaf7;
+  --color-brand-text: #5d4037;
+  --color-brand-primary: #8d6e63;
+  --color-brand-secondary: #5d4037;
+  --color-brand-detail: #e7d8c9;
+  --color-brand-accent: #fdfaf7;
+  --color-brand-red: #cc1616;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-brand-text font-body antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+}
+
+.wave-mask {
+  mask-size: 150vw 50px, 100% calc(100% - 49px);
+  mask-position: var(--wave-offset, 0px) top, center bottom;
+  mask-repeat: repeat-x, no-repeat;
+  -webkit-mask-size: 150vw 50px, 100% calc(100% - 49px);
+  -webkit-mask-position: var(--wave-offset, 0px) top, center bottom;
+  -webkit-mask-repeat: repeat-x, no-repeat;
+}
+
+@media (min-width: 768px) {
+  .wave-mask {
+    mask-size: 100vw 100px, 100% calc(100% - 99px);
+    -webkit-mask-size: 100vw 100px, 100% calc(100% - 99px);
+  }
+}
+
+.wave-shape-1 {
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C480,130 960,-30 1440,50 L1440,100 L0,100 Z' fill='black'/%3E%3C/svg%3E"), linear-gradient(black, black);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C480,130 960,-30 1440,50 L1440,100 L0,100 Z' fill='black'/%3E%3C/svg%3E"), linear-gradient(black, black);
+}
+
+.wave-shape-2 {
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C240,130 480,-30 720,50 C960,130 1200,-30 1440,50 L1440,100 L0,100 Z' fill='black'/%3E%3C/svg%3E"), linear-gradient(black, black);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C240,130 480,-30 720,50 C960,130 1200,-30 1440,50 L1440,100 L0,100 Z' fill='black'/%3E%3C/svg%3E"), linear-gradient(black, black);
+}
+
+.wave-shape-3 {
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C480,180 960,-80 1440,50 L1440,100 L0,100 Z' fill='black'/%3E%3C/svg%3E"), linear-gradient(black, black);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C480,180 960,-80 1440,50 L1440,100 L0,100 Z' fill='black'/%3E%3C/svg%3E"), linear-gradient(black, black);
+}
+
+.wave-shape-4 {
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C160,100 320,0 480,50 C640,100 800,0 960,50 C1120,100 1280,0 1440,50 L1440,100 L0,100 Z' fill='black'/%3E%3C/svg%3E"), linear-gradient(black, black);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C160,100 320,0 480,50 C640,100 800,0 960,50 C1120,100 1280,0 1440,50 L1440,100 L0,100 Z' fill='black'/%3E%3C/svg%3E"), linear-gradient(black, black);
+}
+
+.wave-shape-5 {
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C240,160 480,-60 720,50 C960,160 1200,-60 1440,50 L1440,100 L0,100 Z' fill='black'/%3E%3C/svg%3E"), linear-gradient(black, black);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C240,160 480,-60 720,50 C960,160 1200,-60 1440,50 L1440,100 L0,100 Z' fill='black'/%3E%3C/svg%3E"), linear-gradient(black, black);
+}
+
+.wave-shape-6 {
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C720,150 720,-50 1440,50 L1440,100 L0,100 Z' fill='black'/%3E%3C/svg%3E"), linear-gradient(black, black);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C720,150 720,-50 1440,50 L1440,100 L0,100 Z' fill='black'/%3E%3C/svg%3E"), linear-gradient(black, black);
+}
+
+.blob {
+  @apply absolute rounded-full blur-3xl opacity-50 mix-blend-multiply pointer-events-none;
+}
