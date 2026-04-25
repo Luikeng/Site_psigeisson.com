@@ -240,13 +240,14 @@ const Presentation = () => {
 
   const videoElement = (
     <div className="relative aspect-[9/16] max-w-sm mx-auto rounded-[2rem] overflow-hidden shadow-2xl border-8 border-brand-bg">
-      <iframe 
+      <iframe
         className="w-full h-full"
-        src="https://www.youtube.com/embed/rXN8j0qpmpI" 
+        src="https://www.youtube.com/embed/rXN8j0qpmpI"
         title="Apresentação Geisson Oleques"
-        frameBorder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
+        loading="lazy"
       ></iframe>
     </div>
   );
