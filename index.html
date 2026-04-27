@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- SEO Básico -->
-    <title>Psicólogo Online | Terapia Online com Geisson Oleques</title>
-    <meta name="description" content="Busca por terapia online? Sou Geisson Oleques, psicólogo online (CRP 07/35759). Terapia ativa e dinâmica para ansiedade, depressão e relacionamentos." />
+    <!-- SEO Básico (title, description, canonical sao definidos por rota via react-helmet-async em src/App.tsx) -->
     <meta name="keywords" content="psicologo online, terapia online, psicologo sao leopoldo, geisson oleques, psicoterapia online, psicologo para ansiedade" />
     <meta name="author" content="Geisson Oleques" />
     <link rel="icon" type="image/svg+xml" href="/conversa.svg" />
@@ -15,15 +13,15 @@
     <link rel="preload" as="image" href="/hero-desktop.jpg" media="(min-width: 768px)" />
     <link rel="preload" as="image" href="/hero-mobile.jpg" media="(max-width: 767px)" />
 
-    <!-- Open Graph (WhatsApp, Instagram, Facebook) -->
+    <!-- Open Graph (og:title, og:description, og:url sao definidos por rota via Helmet) -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Psicólogo Online | Terapia Online com Geisson Oleques" />
-    <meta property="og:description" content="Agende sua sessão de terapia online. Um espaço de troca real e compromisso com sua história." />
     <meta property="og:image" content="https://psigeisson.com/hero-desktop.jpg" />
-    <meta property="og:url" content="https://psigeisson.com/" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Geisson Oleques · Psicólogo Online" />
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://psigeisson.com/" />
+    <!-- Twitter Card (titulo/descricao genericos; image fixa) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://psigeisson.com/hero-desktop.jpg" />
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -45,7 +43,6 @@
         "@type": "Country",
         "name": "Brasil"
       },
-      "availableLanguage": "Portuguese",
       "founder": {
         "@type": "Person",
         "name": "Geisson Oleques",
@@ -57,7 +54,6 @@
           "https://www.doctoralia.com.br/geisson-oleques/psicologo/sao-leopoldo"
         ]
       },
-      "serviceType": "Online psychotherapy",
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Atendimentos",

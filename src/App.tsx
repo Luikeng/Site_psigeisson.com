@@ -6,6 +6,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import {
+  FAQ_JSONLD,
+  VIDEO_JSONLD,
+  LOCAL_BUSINESS_JSONLD,
+  SERVICE_JSONLD,
+  BREADCRUMB_SAOLEOPOLDO_JSONLD,
+  BREADCRUMB_TERAPIAONLINE_JSONLD,
+} from './structured-data';
+
+// Detect prerender (Puppeteer headless) so we skip viewport-gated animations
+// and render content as fully visible — otherwise the static HTML captured
+// by @prerenderer keeps every ScrollReveal at opacity:0.
+const IS_PRERENDER = typeof navigator !== 'undefined' &&
+  /HeadlessChrome|prerender/i.test(navigator.userAgent);
 import { 
   Menu, 
   X, 
@@ -28,15 +43,19 @@ const ScrollReveal = ({ children, delay = 0, direction = 'up', intensity = 40, c
     right: { x: -intensity }
   };
 
+  if (IS_PRERENDER) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       className={className}
       initial={{ opacity: 0, ...directions[direction] }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ 
-        duration: 0.8, 
-        delay, 
+      transition={{
+        duration: 0.8,
+        delay,
         ease: [0.21, 0.47, 0.32, 0.98]
       }}
     >
@@ -173,25 +192,25 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section id="inicio" className="relative min-h-[100svh] flex flex-col justify-start md:justify-center bg-brand-bg pt-[100px] md:pt-20 z-0 pb-24 md:pb-32">
+    <section id="inicio" className="relative min-h-[85svh] md:min-h-[100svh] flex flex-col justify-start md:justify-center bg-brand-bg pt-[100px] md:pt-20 z-0 pb-12 md:pb-32">
       {/* Background Images */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <picture>
           <source media="(max-width: 767px)" srcSet={getAssetUrl("hero-mobile.jpg")} />
-          <img 
-            src={getAssetUrl("hero-desktop.jpg")} 
-            alt="Geisson Oleques - Psicólogo Online" 
+          <img
+            src={getAssetUrl("hero-desktop.jpg")}
+            alt="Geisson Oleques - Psicólogo Online"
             className="w-full h-full object-cover object-bottom md:object-center"
           />
         </picture>
-        {/* Overlay para desktop (removido para não clarear a foto) */}
+        {/* Overlay para desktop (gradient lateral para legibilidade do texto à esquerda) */}
         <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-white/60 to-transparent w-1/3"></div>
         {/* Overlay sutil para mobile no topo para garantir leitura do texto */}
         <div className="md:hidden absolute top-0 left-0 w-full h-[40%] bg-gradient-to-b from-white/80 via-white/20 to-transparent"></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10 flex-1 flex flex-col mt-0">
-        <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0 md:mt-32 lg:mt-40 md:pl-16 lg:pl-24">
+        <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0 mt-24 md:mt-32 lg:mt-40 md:pl-16 lg:pl-24">
           <ScrollReveal direction="up">
             <h1 className="text-[2.2rem] leading-[1.1] md:text-6xl lg:text-[4.5rem] mb-2 md:mb-4 text-brand-secondary font-display">
               Psicólogo Online<br />Geisson Oleques
@@ -746,6 +765,16 @@ const ScrollToTop = () => {
 
 const HomePage = () => (
   <>
+    <Helmet>
+      <title>Psicólogo Online | Terapia Online com Geisson Oleques</title>
+      <meta name="description" content="Busca por terapia online? Sou Geisson Oleques, psicólogo online (CRP 07/35759). Terapia ativa e dinâmica para ansiedade, depressão e relacionamentos." />
+      <link rel="canonical" href="https://psigeisson.com/" />
+      <meta property="og:url" content="https://psigeisson.com/" />
+      <meta property="og:title" content="Psicólogo Online | Terapia Online com Geisson Oleques" />
+      <meta property="og:description" content="Agende sua sessão de terapia online. Um espaço de troca real e compromisso com sua história." />
+      <script type="application/ld+json">{JSON.stringify(FAQ_JSONLD)}</script>
+      <script type="application/ld+json">{JSON.stringify(VIDEO_JSONLD)}</script>
+    </Helmet>
     <Hero />
     <Presentation />
     <Terapia />
@@ -755,9 +784,19 @@ const HomePage = () => (
   </>
 );
 
-// You can customize these pages later with specific content
 const SaoLeopoldoPage = () => (
   <>
+    <Helmet>
+      <title>Psicólogo em São Leopoldo · Atendimento Presencial — Geisson Oleques</title>
+      <meta name="description" content="Atendimento psicológico presencial em São Leopoldo (CRP 07/35759). Espaço acolhedor no centro da cidade, abordagem sistêmica, sessões de 50 minutos." />
+      <link rel="canonical" href="https://psigeisson.com/saoleopoldo" />
+      <meta property="og:url" content="https://psigeisson.com/saoleopoldo" />
+      <meta property="og:title" content="Psicólogo em São Leopoldo · Atendimento Presencial" />
+      <meta property="og:description" content="Atendimento presencial no centro de São Leopoldo com Geisson Oleques (CRP 07/35759)." />
+      <script type="application/ld+json">{JSON.stringify(LOCAL_BUSINESS_JSONLD)}</script>
+      <script type="application/ld+json">{JSON.stringify(VIDEO_JSONLD)}</script>
+      <script type="application/ld+json">{JSON.stringify(BREADCRUMB_SAOLEOPOLDO_JSONLD)}</script>
+    </Helmet>
     <Hero />
     <div className="py-20 bg-brand-primary/5">
       <div className="container mx-auto px-6 text-center">
@@ -775,6 +814,17 @@ const SaoLeopoldoPage = () => (
 
 const TerapiaOnlinePage = () => (
   <>
+    <Helmet>
+      <title>Terapia Online — Psicólogo Geisson Oleques · CRP 07/35759</title>
+      <meta name="description" content="Terapia online via Google Meet, em todo o Brasil. Abordagem sistêmica, comunicação ativa e descontraída. Sessões de 50 min, R$220, sigilo LGPD." />
+      <link rel="canonical" href="https://psigeisson.com/terapiaonline" />
+      <meta property="og:url" content="https://psigeisson.com/terapiaonline" />
+      <meta property="og:title" content="Terapia Online com Geisson Oleques" />
+      <meta property="og:description" content="Sessões de terapia online via Google Meet. Abordagem sistêmica, comunicação ativa." />
+      <script type="application/ld+json">{JSON.stringify(SERVICE_JSONLD)}</script>
+      <script type="application/ld+json">{JSON.stringify(FAQ_JSONLD)}</script>
+      <script type="application/ld+json">{JSON.stringify(BREADCRUMB_TERAPIAONLINE_JSONLD)}</script>
+    </Helmet>
     <Hero />
     <div className="py-20 bg-brand-primary/5">
       <div className="container mx-auto px-6 text-center">
@@ -790,10 +840,23 @@ const TerapiaOnlinePage = () => (
   </>
 );
 
+const PrerenderSignal = () => {
+  useEffect(() => {
+    // Wait one tick for child effects + Helmet to flush, then signal the
+    // prerenderer that this route is ready to be captured.
+    const t = setTimeout(() => {
+      document.dispatchEvent(new Event('app-rendered'));
+    }, 300);
+    return () => clearTimeout(t);
+  }, []);
+  return null;
+};
+
 export default function App() {
   return (
     <Router basename="/">
       <ScrollToTop />
+      <PrerenderSignal />
       <div className="min-h-screen selection:bg-brand-primary/30 font-body">
         <Navbar />
         <Routes>
