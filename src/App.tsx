@@ -210,7 +210,7 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10 flex-1 flex flex-col mt-0">
-        <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0 mt-12 md:mt-32 lg:mt-40 md:pl-16 lg:pl-24">
+        <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0 md:mt-32 lg:mt-40 md:pl-16 lg:pl-24">
           <ScrollReveal direction="up">
             <h1 className="text-[2.2rem] leading-[1.1] md:text-6xl lg:text-[4.5rem] mb-2 md:mb-4 text-brand-secondary font-display">
               Psicólogo Online<br />Geisson Oleques
