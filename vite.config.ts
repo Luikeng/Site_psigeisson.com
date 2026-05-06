@@ -13,7 +13,7 @@ export default defineConfig(({mode, command}) => {
       react(),
       tailwindcss(),
       isBuild && prerender({
-        routes: ['/', '/saoleopoldo', '/terapiaonline'],
+        routes: ['/', '/terapiaonline'],
         renderer: '@prerenderer/renderer-puppeteer',
         rendererOptions: {
           renderAfterDocumentEvent: 'app-rendered',

@@ -70,53 +70,6 @@ export const VIDEO_JSONLD = {
   },
 };
 
-export const LOCAL_BUSINESS_JSONLD = {
-  "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService"],
-  "@id": `${SITE}/saoleopoldo#consultorio`,
-  name: "Psicólogo Geisson Oleques · Consultório São Leopoldo",
-  url: `${SITE}/saoleopoldo`,
-  image: `${SITE}/perfil.jpg`,
-  telephone: "+55-51-99274-9130",
-  email: "geisson.oleques@gmail.com",
-  priceRange: "R$220",
-  currenciesAccepted: "BRL",
-  paymentAccepted: "Credit Card, Bank Transfer, PIX",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Rua Presidente Roosevelt, 103, Sala 3",
-    addressLocality: "São Leopoldo",
-    addressRegion: "RS",
-    postalCode: "93010-060",
-    addressCountry: "BR",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: -29.7649231,
-    longitude: -51.1411743,
-  },
-  areaServed: {
-    "@type": "City",
-    name: "São Leopoldo",
-  },
-  founder: {
-    "@type": "Person",
-    name: "Geisson Oleques",
-    jobTitle: "Psicólogo Clínico",
-    identifier: "CRP 07/35759",
-  },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "5",
-    reviewCount: "48",
-    bestRating: "5",
-  },
-  sameAs: [
-    "https://www.instagram.com/geissonoleques",
-    "https://www.doctoralia.com.br/geisson-oleques/psicologo/sao-leopoldo",
-  ],
-};
-
 export const SERVICE_JSONLD = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -176,25 +129,6 @@ export const SERVICE_JSONLD = {
         priceCurrency: "BRL",
         unitText: "pacote de 4 sessões",
       },
-    },
-  ],
-};
-
-export const BREADCRUMB_SAOLEOPOLDO_JSONLD = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Início",
-      item: `${SITE}/`,
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: "Atendimento em São Leopoldo",
-      item: `${SITE}/saoleopoldo`,
     },
   ],
 };

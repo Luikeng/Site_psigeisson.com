@@ -10,9 +10,7 @@ import { Helmet } from 'react-helmet-async';
 import {
   FAQ_JSONLD,
   VIDEO_JSONLD,
-  LOCAL_BUSINESS_JSONLD,
   SERVICE_JSONLD,
-  BREADCRUMB_SAOLEOPOLDO_JSONLD,
   BREADCRUMB_TERAPIAONLINE_JSONLD,
 } from './structured-data';
 
@@ -123,7 +121,6 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Início', href: '/', type: 'route' },
-    { name: 'São Leopoldo', href: '/saoleopoldo', type: 'route' },
     { name: 'Terapia Online', href: '/terapiaonline', type: 'route' },
     { name: 'Dúvidas', href: '#duvidas', type: 'anchor' },
     { name: 'Contato', href: '#contato', type: 'anchor' },
@@ -331,7 +328,7 @@ const Presentation = () => {
             <div>
               <h2 className="text-4xl md:text-5xl mb-6 md:mb-8 text-brand-secondary">Apresentação</h2>
               <p className="text-lg text-brand-text/90 mb-8 md:mb-6 leading-relaxed">
-                Acredito que escolher um psicólogo online ou presencial é, acima de tudo, uma questão de afinidade e confiança. Por isso, gravei este vídeo para me apresentar e contar um pouco sobre como funciona o meu trabalho na clínica.
+                Acredito que escolher um psicólogo é, acima de tudo, uma questão de afinidade e confiança. Por isso, gravei este vídeo para me apresentar e contar um pouco sobre como funciona o meu trabalho online.
               </p>
 
               {/* Mobile Video Container */}
@@ -342,7 +339,7 @@ const Presentation = () => {
               )}
 
               <p className="text-lg text-brand-text/90 mb-8 leading-relaxed">
-                Sou psicólogo clínico (CRP 07/35759) e atuo com a Abordagem Sistêmica. Diferente do silêncio tradicional que muitos imaginam na terapia, meu formato de atendimento é ativo, dinâmico e focado em trocas reais. Meu objetivo é te ajudar a compreender suas emoções, lidar com a ansiedade e melhorar seus relacionamentos, seja através da psicoterapia online para todo o Brasil ou presencial em São Leopoldo.
+                Sou psicólogo clínico (CRP 07/35759) e atuo com a Abordagem Sistêmica Familiar. Diferente do silêncio tradicional que muitos imaginam na terapia, meu formato de atendimento é ativo, dinâmico e focado em trocas reais. Meu objetivo é te ajudar a compreender suas emoções, lidar com a ansiedade e melhorar seus relacionamentos, com psicoterapia online para todo o Brasil.
               </p>
               <div className="space-y-4 mb-10">
                 <div className="flex items-center gap-3 text-brand-secondary font-medium">
@@ -355,7 +352,7 @@ const Presentation = () => {
                 </div>
                 <div className="flex items-center gap-3 text-brand-secondary font-medium">
                   <div className="w-2 h-2 rounded-full bg-brand-primary"></div>
-                  <span>Atendimento Online e Presencial (São Leopoldo/RS)</span>
+                  <span>Atendimento Online em todo o Brasil</span>
                 </div>
               </div>
               <WhatsAppLink className="inline-flex items-center gap-2 bg-brand-primary text-white px-8 py-3 rounded-full font-bold hover:gap-4 transition-all shadow-md">
@@ -410,7 +407,7 @@ const Terapia = () => {
       
       <div className="container mx-auto px-6 relative z-10">
         <ScrollReveal direction="up">
-          <h2 className="text-4xl md:text-5xl text-center mb-16 text-brand-secondary">Terapia online ou presencial</h2>
+          <h2 className="text-4xl md:text-5xl text-center mb-16 text-brand-secondary">Como atendo</h2>
         </ScrollReveal>
         
         <div className="grid md:grid-cols-3 gap-8">
@@ -704,7 +701,6 @@ const Footer = () => {
               <h4 className="text-base font-bold uppercase tracking-[0.2em] mb-6 text-brand-detail text-center md:text-left">Navegação</h4>
               <ul className="space-y-3 text-white/80 text-base text-center md:text-left">
                 <li><Link to="/" className="hover:text-white transition-colors">Início</Link></li>
-                <li><Link to="/saoleopoldo" className="hover:text-white transition-colors">São Leopoldo</Link></li>
                 <li><Link to="/terapiaonline" className="hover:text-white transition-colors">Terapia Online</Link></li>
               </ul>
             </div>
@@ -714,7 +710,7 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-end">
             <div className="text-center md:text-right">
               <h4 className="text-base font-bold uppercase tracking-[0.2em] mb-6 text-brand-detail text-center md:text-right">Agendamento</h4>
-              <p className="text-white/80 text-base mb-6 max-w-[200px] mx-auto md:mx-0 md:ml-auto">Disponível para sessões online e presenciais.</p>
+              <p className="text-white/80 text-base mb-6 max-w-[200px] mx-auto md:mx-0 md:ml-auto">Sessões online via Google Meet em todo o Brasil.</p>
               <WhatsAppLink className="inline-flex items-center gap-3 bg-brand-primary text-white px-6 py-3 rounded-xl font-bold hover:shadow-lg hover:shadow-brand-primary/20 transition-all duration-300 group">
                 <Phone size={20} className="group-hover:rotate-12 transition-transform" />
                 <span>WhatsApp</span>
@@ -915,34 +911,6 @@ const HomePage = () => (
   </>
 );
 
-const SaoLeopoldoPage = () => (
-  <>
-    <Helmet>
-      <title>Psicólogo em São Leopoldo · Atendimento Presencial — Geisson Oleques</title>
-      <meta name="description" content="Atendimento psicológico presencial em São Leopoldo (CRP 07/35759). Espaço acolhedor no centro da cidade, abordagem sistêmica, sessões de 50 minutos." />
-      <link rel="canonical" href="https://psigeisson.com/saoleopoldo" />
-      <meta property="og:url" content="https://psigeisson.com/saoleopoldo" />
-      <meta property="og:title" content="Psicólogo em São Leopoldo · Atendimento Presencial" />
-      <meta property="og:description" content="Atendimento presencial no centro de São Leopoldo com Geisson Oleques (CRP 07/35759)." />
-      <script type="application/ld+json">{JSON.stringify(LOCAL_BUSINESS_JSONLD)}</script>
-      <script type="application/ld+json">{JSON.stringify(VIDEO_JSONLD)}</script>
-      <script type="application/ld+json">{JSON.stringify(BREADCRUMB_SAOLEOPOLDO_JSONLD)}</script>
-    </Helmet>
-    <Hero />
-    <div className="py-20 bg-brand-primary/5">
-      <div className="container mx-auto px-6 text-center">
-        <h2 className="text-4xl text-brand-secondary mb-6">Atendimento Presencial em São Leopoldo</h2>
-        <p className="text-lg text-brand-text/80 max-w-2xl mx-auto">
-          Ofereço um espaço acolhedor e seguro para nossos encontros presenciais, focado no seu bem-estar e desenvolvimento pessoal.
-        </p>
-      </div>
-    </div>
-    <Presentation />
-    <Terapia />
-    <Footer />
-  </>
-);
-
 const TerapiaOnlinePage = () => (
   <>
     <Helmet>
@@ -988,16 +956,14 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/saoleopoldo" element={<SaoLeopoldoPage />} />
           <Route path="/terapiaonline" element={<TerapiaOnlinePage />} />
           {/* Fallback to Home */}
           <Route path="*" element={<HomePage />} />
         </Routes>
-        
-        {/* Footer is usually shared, but some pages might have specific footers */}
+
+        {/* Footer is included inside TerapiaOnlinePage; render here only on Home */}
         <Routes>
           <Route path="/" element={<Footer />} />
-          <Route path="/saoleopoldo" element={null} /> {/* Already included in the page component above for now */}
           <Route path="/terapiaonline" element={null} />
         </Routes>
         
