@@ -70,6 +70,43 @@ const getAssetUrl = (name: string) => {
   return `${import.meta.env.BASE_URL}${cleanName}`;
 };
 
+const WHATSAPP_PHONE = '5551992749130';
+const DEFAULT_WA_TEXT = 'Olá, gostaria de agendar uma consulta!';
+
+const buildWaHref = (text: string = DEFAULT_WA_TEXT): string => {
+  let finalText = text;
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    const gclid = params.get('gclid');
+    const fbclid = params.get('fbclid');
+    const utmSource = params.get('utm_source');
+    if (gclid) finalText += `\n\n[ref:gads-${gclid}]`;
+    else if (fbclid) finalText += `\n\n[ref:meta-${fbclid}]`;
+    else if (utmSource) finalText += `\n\n[ref:${utmSource}]`;
+  }
+  return `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(finalText)}`;
+};
+
+const WhatsAppLink = ({
+  text,
+  children,
+  className,
+}: {
+  text?: string;
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  const [href, setHref] = useState(() => buildWaHref(text));
+  useEffect(() => {
+    setHref(buildWaHref(text));
+  }, [text]);
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+      {children}
+    </a>
+  );
+};
+
 import BackgroundAnimado from './components/BackgroundAnimado';
 
 const Navbar = () => {
@@ -220,14 +257,9 @@ const Hero = () => {
             </span>
             
             <div className="flex justify-center md:justify-start mb-5 md:mb-6">
-              <a 
-                href="https://api.whatsapp.com/send?phone=5551992749130&text=Ol%C3%A1,%20gostaria%20de%20agendar%20uma%20consulta!" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="bg-[#5A4B46] text-white px-8 py-2.5 rounded-full font-bold text-sm shadow-lg hover:bg-[#4A3B36] transition-all inline-block"
-              >
+              <WhatsAppLink className="bg-[#5A4B46] text-white px-8 py-2.5 rounded-full font-bold text-sm shadow-lg hover:bg-[#4A3B36] transition-all inline-block">
                 Fale comigo
-              </a>
+              </WhatsAppLink>
             </div>
 
             <p className="hidden md:block text-[13px] md:text-lg text-brand-text/90 max-w-[280px] md:max-w-lg leading-relaxed font-medium mx-auto md:mx-0">
@@ -326,14 +358,9 @@ const Presentation = () => {
                   <span>Atendimento Online e Presencial (São Leopoldo/RS)</span>
                 </div>
               </div>
-              <a 
-                href="https://api.whatsapp.com/send?phone=5551992749130&text=Ol%C3%A1,%20gostaria%20de%20agendar%20uma%20consulta!" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-brand-primary text-white px-8 py-3 rounded-full font-bold hover:gap-4 transition-all shadow-md"
-              >
+              <WhatsAppLink className="inline-flex items-center gap-2 bg-brand-primary text-white px-8 py-3 rounded-full font-bold hover:gap-4 transition-all shadow-md">
                 Agendar Horário <ChevronRight size={20} />
-              </a>
+              </WhatsAppLink>
             </div>
           </ScrollReveal>
         </div>
@@ -420,7 +447,7 @@ const FAQ = () => {
   const waveOffset = useTransform(scrollYProgress, [0, 1], ["-70vw", "70vw"]);
 
   const faqs = [
-    { q: 'Quanto custa uma sessão?', a: 'O valor de cada sessão é 220 R$. O pagamento pode ser por cartão ou transferência bancária. Caso prefira utilizar outro meio de pagamento, estou à disposição para alinhar a melhor opção.' },
+    { q: 'Quanto custa uma sessão?', a: 'A sessão avulsa de 50 minutos custa R$ 220 (cartão, PIX ou transferência). Também ofereço o pacote de 4 sessões pagas antecipadamente por R$ 600 (equivalente a R$ 150 por sessão). Caso prefira outro meio de pagamento, estou à disposição.' },
     { q: 'As sessões online são sigilosas?', a: 'Sim, as sessões online são completamente sigilosas e seguem as diretrizes da Lei Geral de Proteção de Dados (LGPD), garantindo a privacidade e a segurança das informações compartilhadas. Normalmente, utilizo o Google Meet.' },
     { q: 'Qual a abordagem teórica?', a: 'Minha trajetória acadêmica e profissional teve diversas fases, mas hoje me concentro no estudo da Abordagem Sistêmica Familiar, com a qual me identifico.' },
     { q: 'Os atendimentos são apenas particulares?', a: 'Sim, os atendimentos são exclusivamente particulares. No entanto, muitos pacientes conseguem obter reembolso pelas sessões junto aos seus planos de saúde.' },
@@ -646,7 +673,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 mb-16 text-center md:text-left">
           {/* Coluna 1: Logo e CRP */}
           <div className="flex flex-col items-center md:items-start">
-            <img src={getAssetUrl("logo-new.png")} alt="Arte Mental Logo" className="h-16 mb-6 brightness-0 invert" />
+            <img src={getAssetUrl("logo-new.png")} alt="Logo Psicólogo Geisson Oleques" className="h-16 mb-6 brightness-0 invert" />
             <p className="text-white/80 text-base max-w-sm mb-6 leading-relaxed">
               Psicólogo Geisson Oleques (CRP 07/35759). <br />
               Terapia ativa e dinâmica para quem busca transformações reais e compromisso com sua história.
@@ -688,21 +715,16 @@ const Footer = () => {
             <div className="text-center md:text-right">
               <h4 className="text-base font-bold uppercase tracking-[0.2em] mb-6 text-brand-detail text-center md:text-right">Agendamento</h4>
               <p className="text-white/80 text-base mb-6 max-w-[200px] mx-auto md:mx-0 md:ml-auto">Disponível para sessões online e presenciais.</p>
-              <a 
-                href="https://wa.me/5551992749130" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-brand-primary text-white px-6 py-3 rounded-xl font-bold hover:shadow-lg hover:shadow-brand-primary/20 transition-all duration-300 group"
-              >
-                <Phone size={20} className="group-hover:rotate-12 transition-transform" /> 
+              <WhatsAppLink className="inline-flex items-center gap-3 bg-brand-primary text-white px-6 py-3 rounded-xl font-bold hover:shadow-lg hover:shadow-brand-primary/20 transition-all duration-300 group">
+                <Phone size={20} className="group-hover:rotate-12 transition-transform" />
                 <span>WhatsApp</span>
-              </a>
+              </WhatsAppLink>
             </div>
           </div>
         </div>
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/60 text-sm">
-          <p className="text-center md:text-left">© {new Date().getFullYear()} Arte Mental. Todos os direitos reservados.</p>
+          <p className="text-center md:text-left">© {new Date().getFullYear()} Psicólogo Geisson Oleques. Todos os direitos reservados.</p>
           <div className="flex gap-8">
             <p className="text-center md:text-right">Geisson Oleques • CRP 07/35759</p>
           </div>
@@ -714,8 +736,10 @@ const Footer = () => {
 
 const FloatingWhatsApp = () => {
   const [isVisible, setIsVisible] = React.useState(true);
+  const [href, setHref] = React.useState(() => buildWaHref());
 
   React.useEffect(() => {
+    setHref(buildWaHref());
     const handleScroll = () => {
       // On mobile, hide if scroll is less than 100px
       if (window.innerWidth < 768) {
@@ -732,7 +756,7 @@ const FloatingWhatsApp = () => {
 
   return (
     <motion.a
-      href="https://api.whatsapp.com/send?phone=5551992749130&text=Ol%C3%A1,%20gostaria%20de%20agendar%20uma%20consulta!"
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}
@@ -748,6 +772,113 @@ const FloatingWhatsApp = () => {
         Agendar Sessão
       </span>
     </motion.a>
+  );
+};
+
+const TrustBadges = () => {
+  const badges = [
+    { label: 'CRP 07/35759', sub: 'Profissional registrado' },
+    { label: 'Sigilo LGPD', sub: 'Sessões confidenciais' },
+    { label: 'Emite Nota Fiscal', sub: 'Para reembolso no plano' },
+    { label: 'Google Meet', sub: 'Sessões em qualquer lugar' },
+  ];
+  return (
+    <section className="bg-brand-primary/5 border-y border-brand-detail/30 py-8 md:py-10 z-10 relative">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 max-w-5xl mx-auto">
+          {badges.map((b) => (
+            <div key={b.label} className="text-center">
+              <p className="font-bold text-brand-secondary text-sm md:text-base">{b.label}</p>
+              <p className="text-brand-text/60 text-xs md:text-sm">{b.sub}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const ParaQuemE = () => {
+  const areas = [
+    { titulo: 'Ansiedade', desc: 'Preocupação constante, insônia, crises e sensação de estar sempre acelerado.' },
+    { titulo: 'Depressão', desc: 'Tristeza persistente, falta de motivação, exaustão e desconexão com o que importa.' },
+    { titulo: 'Jovens adultos', desc: 'Carreira, vida amorosa, identidade, transição da casa dos pais e pressões da vida adulta.' },
+    { titulo: 'Relacionamentos', desc: 'Conflitos com parceiros, família ou amigos, dependência emocional e dificuldade de comunicar.' },
+  ];
+  return (
+    <section className="py-20 md:py-24 bg-white relative z-10">
+      <div className="container mx-auto px-6 max-w-5xl">
+        <ScrollReveal direction="up">
+          <h2 className="text-4xl md:text-5xl text-center mb-4 text-brand-secondary">Para quem é</h2>
+          <p className="text-center text-brand-text/70 mb-12 max-w-2xl mx-auto">
+            Atendo adultos que buscam um espaço de troca real, com escuta ativa e conversas que fazem pensar.
+          </p>
+        </ScrollReveal>
+        <div className="grid md:grid-cols-2 gap-6">
+          {areas.map((a, i) => (
+            <ScrollReveal key={a.titulo} delay={i * 0.1} direction="up">
+              <div className="bg-brand-bg p-7 rounded-2xl border border-brand-detail/30 h-full">
+                <h3 className="text-xl font-bold text-brand-secondary mb-2">{a.titulo}</h3>
+                <p className="text-brand-text/80 text-sm leading-relaxed">{a.desc}</p>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Pacote = () => {
+  return (
+    <section id="investimento" className="py-20 md:py-24 bg-brand-bg relative z-10">
+      <div className="container mx-auto px-6 max-w-4xl">
+        <ScrollReveal direction="up">
+          <h2 className="text-4xl md:text-5xl text-center mb-4 text-brand-secondary">Investimento</h2>
+          <p className="text-center text-brand-text/70 mb-12">
+            Sessões individuais de 50 minutos via Google Meet. Cartão, PIX ou transferência.
+          </p>
+        </ScrollReveal>
+        <div className="grid md:grid-cols-2 gap-6">
+          <ScrollReveal direction="left">
+            <div className="bg-white p-8 rounded-3xl shadow-md border border-brand-detail/30 h-full flex flex-col">
+              <h3 className="text-2xl font-bold text-brand-secondary mb-2">Sessão avulsa</h3>
+              <p className="text-5xl font-bold text-brand-primary mb-1">R$ 220</p>
+              <p className="text-brand-text/60 text-sm mb-6">por sessão de 50 min</p>
+              <ul className="space-y-2 text-brand-text/80 text-sm mb-8 flex-1">
+                <li>Pagamento por sessão</li>
+                <li>Frequência semanal recomendada</li>
+                <li>Nota fiscal para reembolso no plano</li>
+              </ul>
+              <WhatsAppLink
+                text="Olá, quero agendar uma sessão avulsa de terapia online!"
+                className="inline-block bg-brand-primary text-white px-6 py-3 rounded-full font-bold w-full text-center hover:opacity-90 transition-opacity"
+              >
+                Agendar sessão
+              </WhatsAppLink>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal direction="right" delay={0.1}>
+            <div className="bg-brand-secondary p-8 rounded-3xl shadow-xl text-white h-full relative flex flex-col">
+              <h3 className="text-2xl font-bold mb-2">Acompanhamento (4 sessões)</h3>
+              <p className="text-5xl font-bold mb-1">R$ 600</p>
+              <p className="text-white/70 text-sm mb-6">R$ 150 por sessão</p>
+              <ul className="space-y-2 text-white/90 text-sm mb-8 flex-1">
+                <li>4 sessões pagas antecipadamente</li>
+                <li>Validade de 8 semanas</li>
+                <li>Nota fiscal para reembolso no plano</li>
+              </ul>
+              <WhatsAppLink
+                text="Olá, quero conhecer o pacote de 4 sessões de terapia online!"
+                className="inline-block bg-white text-brand-secondary px-6 py-3 rounded-full font-bold w-full text-center hover:opacity-90 transition-opacity"
+              >
+                Conhecer o pacote
+              </WhatsAppLink>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
   );
 };
 
@@ -816,26 +947,22 @@ const TerapiaOnlinePage = () => (
   <>
     <Helmet>
       <title>Terapia Online — Psicólogo Geisson Oleques · CRP 07/35759</title>
-      <meta name="description" content="Terapia online via Google Meet, em todo o Brasil. Abordagem sistêmica, comunicação ativa e descontraída. Sessões de 50 min, R$220, sigilo LGPD." />
+      <meta name="description" content="Terapia online via Google Meet em todo o Brasil. Abordagem sistêmica familiar, comunicação ativa. Sessão R$220 ou pacote de 4 sessões R$600. Emite nota fiscal para reembolso no plano de saúde." />
       <link rel="canonical" href="https://psigeisson.com/terapiaonline" />
       <meta property="og:url" content="https://psigeisson.com/terapiaonline" />
       <meta property="og:title" content="Terapia Online com Geisson Oleques" />
-      <meta property="og:description" content="Sessões de terapia online via Google Meet. Abordagem sistêmica, comunicação ativa." />
+      <meta property="og:description" content="Sessões de terapia online via Google Meet. R$220 avulsa ou pacote 4 sessões R$600. Nota fiscal para reembolso." />
       <script type="application/ld+json">{JSON.stringify(SERVICE_JSONLD)}</script>
       <script type="application/ld+json">{JSON.stringify(FAQ_JSONLD)}</script>
       <script type="application/ld+json">{JSON.stringify(BREADCRUMB_TERAPIAONLINE_JSONLD)}</script>
     </Helmet>
     <Hero />
-    <div className="py-20 bg-brand-primary/5">
-      <div className="container mx-auto px-6 text-center">
-        <h2 className="text-4xl text-brand-secondary mb-6">Terapia Online</h2>
-        <p className="text-lg text-brand-text/80 max-w-2xl mx-auto">
-          A flexibilidade do atendimento online permite que você cuide da sua saúde mental de onde estiver, com o mesmo sigilo e profundidade do presencial.
-        </p>
-      </div>
-    </div>
-    <Terapia />
+    <TrustBadges />
+    <Presentation />
+    <ParaQuemE />
+    <Pacote />
     <FAQ />
+    <Testimonials />
     <Footer />
   </>
 );
