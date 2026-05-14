@@ -88,17 +88,7 @@ const trackWaConversion = () => {
 };
 
 const buildWaHref = (text: string = DEFAULT_WA_TEXT): string => {
-  let finalText = text;
-  if (typeof window !== 'undefined') {
-    const params = new URLSearchParams(window.location.search);
-    const gclid = params.get('gclid');
-    const fbclid = params.get('fbclid');
-    const utmSource = params.get('utm_source');
-    if (gclid) finalText += `\n\n[ref:gads-${gclid}]`;
-    else if (fbclid) finalText += `\n\n[ref:meta-${fbclid}]`;
-    else if (utmSource) finalText += `\n\n[ref:${utmSource}]`;
-  }
-  return `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(finalText)}`;
+  return `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(text)}`;
 };
 
 const WhatsAppLink = ({
