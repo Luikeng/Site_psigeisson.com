@@ -71,6 +71,22 @@ const getAssetUrl = (name: string) => {
 const WHATSAPP_PHONE = '5551992749130';
 const DEFAULT_WA_TEXT = 'Olá, gostaria de agendar uma consulta!';
 
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
+const trackWaConversion = () => {
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+    window.gtag('event', 'conversion', {
+      send_to: 'AW-17848704103/qTohCPOJz40cEOe49r5C',
+      value: 220.0,
+      currency: 'BRL',
+    });
+  }
+};
+
 const buildWaHref = (text: string = DEFAULT_WA_TEXT): string => {
   let finalText = text;
   if (typeof window !== 'undefined') {
@@ -99,7 +115,13 @@ const WhatsAppLink = ({
     setHref(buildWaHref(text));
   }, [text]);
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+    <a
+      href={href}
+      onClick={trackWaConversion}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={className}
+    >
       {children}
     </a>
   );
@@ -262,6 +284,70 @@ const Hero = () => {
             <p className="hidden md:block text-[13px] md:text-lg text-brand-text/90 max-w-[280px] md:max-w-lg leading-relaxed font-medium mx-auto md:mx-0">
               Olá! Sou Geisson Oleques. Apresento aqui meu trabalho para que você decida, com calma, se deseja iniciar sua terapia online.
             </p>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const HeroTerapiaOnline = () => {
+  return (
+    <section id="inicio" className="relative min-h-[85svh] md:min-h-[100svh] flex flex-col justify-start md:justify-center bg-brand-bg pt-[100px] md:pt-20 z-0 pb-12 md:pb-32">
+      {/* Background Images */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <picture>
+          <source media="(max-width: 767px)" srcSet={getAssetUrl("hero-mobile.jpg")} />
+          <img
+            src={getAssetUrl("hero-desktop.jpg")}
+            alt="Geisson Oleques - Psicólogo Online"
+            className="w-full h-full object-cover object-bottom md:object-center"
+          />
+        </picture>
+        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-white/70 to-transparent w-1/2"></div>
+        <div className="md:hidden absolute top-0 left-0 w-full h-[55%] bg-gradient-to-b from-white/90 via-white/40 to-transparent"></div>
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10 flex-1 flex flex-col mt-0">
+        <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0 md:mt-24 lg:mt-32 md:pl-16 lg:pl-24">
+          <ScrollReveal direction="up">
+            <h1 className="text-[2rem] leading-[1.1] md:text-[3.5rem] lg:text-[4rem] mb-3 md:mb-4 text-brand-secondary font-display">
+              Terapia Online<br />com Psicólogo
+            </h1>
+            <p className="text-brand-text font-medium text-sm md:text-lg mb-5 md:mb-6 max-w-md mx-auto md:mx-0">
+              Sessões via Google Meet em todo o Brasil. Conversa real, sem silêncio. Atendo esta semana.
+            </p>
+
+            <div className="grid grid-cols-2 gap-2 md:gap-3 mb-6 md:mb-8 max-w-md mx-auto md:mx-0">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl px-3 py-2 md:px-4 md:py-2.5 border border-brand-detail/40">
+                <p className="text-brand-secondary font-bold text-sm md:text-base">R$ 220</p>
+                <p className="text-brand-text/70 text-xs">sessão de 50 min</p>
+              </div>
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl px-3 py-2 md:px-4 md:py-2.5 border border-brand-detail/40">
+                <p className="text-brand-secondary font-bold text-sm md:text-base">R$ 600</p>
+                <p className="text-brand-text/70 text-xs">pacote 4 sessões</p>
+              </div>
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl px-3 py-2 md:px-4 md:py-2.5 border border-brand-detail/40">
+                <p className="text-brand-secondary font-bold text-sm md:text-base">Nota fiscal</p>
+                <p className="text-brand-text/70 text-xs">reembolso no plano</p>
+              </div>
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl px-3 py-2 md:px-4 md:py-2.5 border border-brand-detail/40">
+                <p className="text-brand-secondary font-bold text-sm md:text-base">CRP 07/35759</p>
+                <p className="text-brand-text/70 text-xs">sigilo LGPD</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center md:items-start gap-2">
+              <WhatsAppLink
+                text="Olá, vim do Google. Quero agendar uma conversa inicial de terapia online!"
+                className="bg-[#25D366] text-white px-8 py-4 rounded-full font-bold text-base md:text-lg shadow-xl hover:bg-[#1faa53] transition-all inline-flex items-center gap-2"
+              >
+                <MessageCircle size={22} /> Agendar conversa no WhatsApp
+              </WhatsAppLink>
+              <p className="text-brand-text/70 text-xs md:text-sm">
+                Resposta em até algumas horas · Sem compromisso
+              </p>
+            </div>
           </ScrollReveal>
         </div>
       </div>
@@ -753,12 +839,13 @@ const FloatingWhatsApp = () => {
   return (
     <motion.a
       href={href}
+      onClick={trackWaConversion}
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}
-      animate={{ 
-        scale: isVisible ? 1 : 0, 
-        opacity: isVisible ? 1 : 0 
+      animate={{
+        scale: isVisible ? 1 : 0,
+        opacity: isVisible ? 1 : 0
       }}
       whileHover={{ scale: 1.1 }}
       className="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl flex items-center justify-center group"
@@ -924,11 +1011,11 @@ const TerapiaOnlinePage = () => (
       <script type="application/ld+json">{JSON.stringify(FAQ_JSONLD)}</script>
       <script type="application/ld+json">{JSON.stringify(BREADCRUMB_TERAPIAONLINE_JSONLD)}</script>
     </Helmet>
-    <Hero />
+    <HeroTerapiaOnline />
     <TrustBadges />
+    <Pacote />
     <Presentation />
     <ParaQuemE />
-    <Pacote />
     <FAQ />
     <Testimonials />
     <Footer />
