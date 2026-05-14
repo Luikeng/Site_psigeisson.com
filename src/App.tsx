@@ -291,70 +291,6 @@ const Hero = () => {
   );
 };
 
-const HeroTerapiaOnline = () => {
-  return (
-    <section id="inicio" className="relative min-h-[85svh] md:min-h-[100svh] flex flex-col justify-start md:justify-center bg-brand-bg pt-[100px] md:pt-20 z-0 pb-12 md:pb-32">
-      {/* Background Images */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <picture>
-          <source media="(max-width: 767px)" srcSet={getAssetUrl("hero-mobile.jpg")} />
-          <img
-            src={getAssetUrl("hero-desktop.jpg")}
-            alt="Geisson Oleques - Psicólogo Online"
-            className="w-full h-full object-cover object-bottom md:object-center"
-          />
-        </picture>
-        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-white/70 to-transparent w-1/2"></div>
-        <div className="md:hidden absolute top-0 left-0 w-full h-[55%] bg-gradient-to-b from-white/90 via-white/40 to-transparent"></div>
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10 flex-1 flex flex-col mt-0">
-        <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0 md:mt-24 lg:mt-32 md:pl-16 lg:pl-24">
-          <ScrollReveal direction="up">
-            <h1 className="text-[2rem] leading-[1.1] md:text-[3.5rem] lg:text-[4rem] mb-3 md:mb-4 text-brand-secondary font-display">
-              Terapia Online<br />com Psicólogo
-            </h1>
-            <p className="text-brand-text font-medium text-sm md:text-lg mb-5 md:mb-6 max-w-md mx-auto md:mx-0">
-              Sessões via Google Meet em todo o Brasil. Conversa real, sem silêncio. Atendo esta semana.
-            </p>
-
-            <div className="grid grid-cols-2 gap-2 md:gap-3 mb-6 md:mb-8 max-w-md mx-auto md:mx-0">
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl px-3 py-2 md:px-4 md:py-2.5 border border-brand-detail/40">
-                <p className="text-brand-secondary font-bold text-sm md:text-base">R$ 220</p>
-                <p className="text-brand-text/70 text-xs">sessão de 50 min</p>
-              </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl px-3 py-2 md:px-4 md:py-2.5 border border-brand-detail/40">
-                <p className="text-brand-secondary font-bold text-sm md:text-base">R$ 600</p>
-                <p className="text-brand-text/70 text-xs">pacote 4 sessões</p>
-              </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl px-3 py-2 md:px-4 md:py-2.5 border border-brand-detail/40">
-                <p className="text-brand-secondary font-bold text-sm md:text-base">Nota fiscal</p>
-                <p className="text-brand-text/70 text-xs">reembolso no plano</p>
-              </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl px-3 py-2 md:px-4 md:py-2.5 border border-brand-detail/40">
-                <p className="text-brand-secondary font-bold text-sm md:text-base">CRP 07/35759</p>
-                <p className="text-brand-text/70 text-xs">sigilo LGPD</p>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center md:items-start gap-2">
-              <WhatsAppLink
-                text="Olá, vim do Google. Quero agendar uma conversa inicial de terapia online!"
-                className="bg-[#25D366] text-white px-8 py-4 rounded-full font-bold text-base md:text-lg shadow-xl hover:bg-[#1faa53] transition-all inline-flex items-center gap-2"
-              >
-                <MessageCircle size={22} /> Agendar conversa no WhatsApp
-              </WhatsAppLink>
-              <p className="text-brand-text/70 text-xs md:text-sm">
-                Resposta em até algumas horas · Sem compromisso
-              </p>
-            </div>
-          </ScrollReveal>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const Presentation = () => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -530,7 +466,7 @@ const FAQ = () => {
   const waveOffset = useTransform(scrollYProgress, [0, 1], ["-70vw", "70vw"]);
 
   const faqs = [
-    { q: 'Quanto custa uma sessão?', a: 'A sessão avulsa de 50 minutos custa R$ 220 (cartão, PIX ou transferência). Também ofereço o pacote de 4 sessões pagas antecipadamente por R$ 600 (equivalente a R$ 150 por sessão). Caso prefira outro meio de pagamento, estou à disposição.' },
+    { q: 'Quanto custa uma sessão?', a: 'A sessão avulsa de 50 minutos custa R$ 220 (cartão, PIX ou transferência). Também ofereço o pacote de 4 sessões pagas antecipadamente por R$ 800 (equivalente a R$ 200 por sessão). Caso prefira outro meio de pagamento, estou à disposição.' },
     { q: 'As sessões online são sigilosas?', a: 'Sim, as sessões online são completamente sigilosas e seguem as diretrizes da Lei Geral de Proteção de Dados (LGPD), garantindo a privacidade e a segurança das informações compartilhadas. Normalmente, utilizo o Google Meet.' },
     { q: 'Qual a abordagem teórica?', a: 'Minha trajetória acadêmica e profissional teve diversas fases, mas hoje me concentro no estudo da Abordagem Sistêmica Familiar, com a qual me identifico.' },
     { q: 'Os atendimentos são apenas particulares?', a: 'Sim, os atendimentos são exclusivamente particulares. No entanto, muitos pacientes conseguem obter reembolso pelas sessões junto aos seus planos de saúde.' },
@@ -912,59 +848,6 @@ const ParaQuemE = () => {
   );
 };
 
-const Pacote = () => {
-  return (
-    <section id="investimento" className="py-20 md:py-24 bg-brand-bg relative z-10">
-      <div className="container mx-auto px-6 max-w-4xl">
-        <ScrollReveal direction="up">
-          <h2 className="text-4xl md:text-5xl text-center mb-4 text-brand-secondary">Investimento</h2>
-          <p className="text-center text-brand-text/70 mb-12">
-            Sessões individuais de 50 minutos via Google Meet. Cartão, PIX ou transferência.
-          </p>
-        </ScrollReveal>
-        <div className="grid md:grid-cols-2 gap-6">
-          <ScrollReveal direction="left">
-            <div className="bg-white p-8 rounded-3xl shadow-md border border-brand-detail/30 h-full flex flex-col">
-              <h3 className="text-2xl font-bold text-brand-secondary mb-2">Sessão avulsa</h3>
-              <p className="text-5xl font-bold text-brand-primary mb-1">R$ 220</p>
-              <p className="text-brand-text/60 text-sm mb-6">por sessão de 50 min</p>
-              <ul className="space-y-2 text-brand-text/80 text-sm mb-8 flex-1">
-                <li>Pagamento por sessão</li>
-                <li>Frequência semanal recomendada</li>
-                <li>Nota fiscal para reembolso no plano</li>
-              </ul>
-              <WhatsAppLink
-                text="Olá, quero agendar uma sessão avulsa de terapia online!"
-                className="inline-block bg-brand-primary text-white px-6 py-3 rounded-full font-bold w-full text-center hover:opacity-90 transition-opacity"
-              >
-                Agendar sessão
-              </WhatsAppLink>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal direction="right" delay={0.1}>
-            <div className="bg-brand-secondary p-8 rounded-3xl shadow-xl text-white h-full relative flex flex-col">
-              <h3 className="text-2xl font-bold mb-2">Acompanhamento (4 sessões)</h3>
-              <p className="text-5xl font-bold mb-1">R$ 600</p>
-              <p className="text-white/70 text-sm mb-6">R$ 150 por sessão</p>
-              <ul className="space-y-2 text-white/90 text-sm mb-8 flex-1">
-                <li>4 sessões pagas antecipadamente</li>
-                <li>Validade de 8 semanas</li>
-                <li>Nota fiscal para reembolso no plano</li>
-              </ul>
-              <WhatsAppLink
-                text="Olá, quero conhecer o pacote de 4 sessões de terapia online!"
-                className="inline-block bg-white text-brand-secondary px-6 py-3 rounded-full font-bold w-full text-center hover:opacity-90 transition-opacity"
-              >
-                Conhecer o pacote
-              </WhatsAppLink>
-            </div>
-          </ScrollReveal>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 // --- Page Components ---
 
 const ScrollToTop = () => {
@@ -1011,9 +894,8 @@ const TerapiaOnlinePage = () => (
       <script type="application/ld+json">{JSON.stringify(FAQ_JSONLD)}</script>
       <script type="application/ld+json">{JSON.stringify(BREADCRUMB_TERAPIAONLINE_JSONLD)}</script>
     </Helmet>
-    <HeroTerapiaOnline />
+    <Hero />
     <TrustBadges />
-    <Pacote />
     <Presentation />
     <ParaQuemE />
     <FAQ />
