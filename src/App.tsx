@@ -875,11 +875,11 @@ const TerapiaOnlinePage = () => (
   <>
     <Helmet>
       <title>Terapia Online — Psicólogo Geisson Oleques · CRP 07/35759</title>
-      <meta name="description" content="Terapia online via Google Meet em todo o Brasil. Abordagem sistêmica familiar, comunicação ativa. Sessão R$220 ou pacote de 4 sessões R$600. Emite nota fiscal para reembolso no plano de saúde." />
+      <meta name="description" content="Terapia online via Google Meet em todo o Brasil. Psicólogo clínico CRP 07/35759, abordagem sistêmica familiar, comunicação ativa. Emite nota fiscal para reembolso no plano de saúde." />
       <link rel="canonical" href="https://psigeisson.com/terapiaonline" />
       <meta property="og:url" content="https://psigeisson.com/terapiaonline" />
       <meta property="og:title" content="Terapia Online com Geisson Oleques" />
-      <meta property="og:description" content="Sessões de terapia online via Google Meet. R$220 avulsa ou pacote 4 sessões R$600. Nota fiscal para reembolso." />
+      <meta property="og:description" content="Sessões de terapia online via Google Meet com psicólogo clínico. Abordagem sistêmica familiar e nota fiscal para reembolso no plano." />
       <script type="application/ld+json">{JSON.stringify(SERVICE_JSONLD)}</script>
       <script type="application/ld+json">{JSON.stringify(FAQ_JSONLD)}</script>
       <script type="application/ld+json">{JSON.stringify(BREADCRUMB_TERAPIAONLINE_JSONLD)}</script>

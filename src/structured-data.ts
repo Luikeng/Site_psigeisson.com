@@ -16,7 +16,7 @@ const SITE = "https://psigeisson.com";
 const FAQS = [
   {
     q: "Quanto custa uma sessão?",
-    a: "A sessão avulsa de 50 minutos custa R$ 220 (cartão, PIX ou transferência). Também ofereço o pacote de 4 sessões pagas antecipadamente por R$ 600 (equivalente a R$ 150 por sessão). Caso prefira outro meio de pagamento, estou à disposição.",
+    a: "A sessão avulsa de 50 minutos custa R$ 220 (cartão, PIX ou transferência). Também ofereço o pacote de 4 sessões pagas antecipadamente por R$ 800 (equivalente a R$ 200 por sessão). Caso prefira outro meio de pagamento, estou à disposição.",
   },
   {
     q: "As sessões online são sigilosas?",
@@ -113,21 +113,6 @@ export const SERVICE_JSONLD = {
         price: "220.00",
         priceCurrency: "BRL",
         unitText: "sessão de 50 minutos",
-      },
-    },
-    {
-      "@type": "Offer",
-      name: "Pacote 4 sessões",
-      price: "600.00",
-      priceCurrency: "BRL",
-      availability: "https://schema.org/InStock",
-      description:
-        "Pacote de 4 sessões individuais de 50 minutos via Google Meet, pago antecipadamente (R$ 150 por sessão).",
-      priceSpecification: {
-        "@type": "UnitPriceSpecification",
-        price: "600.00",
-        priceCurrency: "BRL",
-        unitText: "pacote de 4 sessões",
       },
     },
   ],
